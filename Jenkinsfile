@@ -30,8 +30,8 @@ pipeline {
         stage('Push Image (OpenShift internal repo)') {
             steps {
                 sh "sudo docker login https://registry.apps.openshift4.openshift-sysdig.net --username ${OPENSHIFTREF_USR} --password ${OPENSHIFTREF_PSW}"
-                sh "docker tag sysdigcicd/alpine:3.9.3 registry.apps.openshift4.openshift-sysdig.net/sysdig-image/alpine:3.9.3"
-                sh "docker push registry.apps.openshift4.openshift-sysdig.net/sysdig-image/alpine:3.9.3"
+                sh "sudo docker tag sysdigcicd/alpine:3.9.3 registry.apps.openshift4.openshift-sysdig.net/sysdig-image/alpine:3.9.3"
+                sh "sudo docker push registry.apps.openshift4.openshift-sysdig.net/sysdig-image/alpine:3.9.3"
             }
         }
    }
