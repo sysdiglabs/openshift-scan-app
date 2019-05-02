@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                sh "sudo docker build -f Dockerfile -t sysdigcicd/alpine:3.9.3 ."
+                sh "sudo docker build --no-cache -f Dockerfile -t sysdigcicd/alpine:3.9.3 ."
             }
         }
         stage('Push Image (Scrap repo)') {
