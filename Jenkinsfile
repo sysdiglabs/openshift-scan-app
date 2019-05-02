@@ -12,14 +12,14 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                sh "sudo docker build -f Dockerfile -t sysdigcicd/cronagent ."
+                sh "sudo docker build -f Dockerfile -t sysdigcicd/alpine:3.9.3 ."
             }
         }
         stage('Push Image (Scrap repo)') {
             steps {
                 sh "sudo docker login --username ${DOCKER_USR} --password ${DOCKER_PSW}"
-                sh "sudo docker push sysdigcicd/cronagent"
-                sh "echo docker.io/sysdigcicd/cronagent > sysdig_secure_images"
+                sh "sudo docker push sysdigcicd/alpine:3.9.3"
+                sh "echo docker.io/sysdigcicd/alpine:3.9.3 > sysdig_secure_images"
             }
         }
         stage('Scanning Image') {
@@ -30,8 +30,8 @@ pipeline {
         stage('Push Image (OpenShift internal repo)') {
             steps {
                 sh "sudo docker login https://registry.apps.openshift4.openshift-sysdig.net --username ${OPENSHIFTREF_USR} --password ${OPENSHIFTREF_PSW}"
-                sh "docker tag sysdigcicd/cronagent registry.apps.openshift4.openshift-sysdig.net/sysdig-image/cronagent:0.1"
-                sh "docker push registry.apps.openshift4.openshift-sysdig.net/sysdig-image/cronagent:0.1"
+                sh "docker tag sysdigcicd/alpine:3.9.3 registry.apps.openshift4.openshift-sysdig.net/sysdig-image/alpine:3.9.3"
+                sh "docker push registry.apps.openshift4.openshift-sysdig.net/sysdig-image/alpine:3.9.3"
             }
         }
    }
