@@ -15,7 +15,7 @@ pipeline {
                 sh "sudo docker build --no-cache -f Dockerfile -t sysdigcicd/alpine:3.9.3 ."
             }
         }
-        stage('Push Image (Scrap repo)') {
+        stage('Push Image (Staging repo)') {
             steps {
                 sh "sudo docker login --username ${DOCKER_USR} --password ${DOCKER_PSW}"
                 sh "sudo docker push sysdigcicd/alpine:3.9.3"
